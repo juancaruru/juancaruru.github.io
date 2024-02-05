@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bingo</title>
+        <link rel="stylesheet" href="assets/css/bingo.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="title">BINGO</h1>
+            <h2 class="subtitle"> Múltiplos y divisores de la fortuna</h2>
+            <div class="button-container">
+                <button class="fancy-button new" onclick="popUpCard()">Nuevo
+                    criterio</button>
+                <button class="fancy-button last" id="show" onclick="showLast()">Mostrar
+                    de nuevo</button>
+                <button class="fancy-button solveAll" onclick="solveAll()">Resolver
+                    todos</button>
+                <button class="fancy-button reset" onclick="reset()">Nuevo bingo</button>
+            </div>
+            <table id="table-tarjetas">
+                <thead>
+                    <tr>
+                        <th>Criterio</th>
+                        <th>Solución</th>
+                    </tr>
+                </thead>
+                <tbody id="table-tarjetas-body">
+                </tbody>
+            </table>
+        </div>
+        <footer>Game made by <a href="https://github.com/juancaruru"><i class="fa fa-github"></i> juancaruru</a> — Project under MIT License</footer>
+        <script>
+        const data = [
+            {
+                "question": "Sin contar el 1 como número primo, tercer número primo",
+                "solution": "5",
+            },
+            {
+                "question": "El mínimo común múltiplo de 2 y 3",
+                "solution": "6",
+            },
+            {
+                "question": "Primer múltiplo del 7",
+                "solution": "7",
+            },
+            {
+                "question": "Divisores del 9",
+                "solution": "1, 3, 9",
+            },
+            {
+                "question": "Mínimo común múltiplo de 2 y 5",
+                "solution": "10", 
+            },
+            {
+                "question": "Divisores del 11",
+                "solution": "1, 11",
+            },
+            {
+                "question": "Mínimo común múltiplo de 2 y 6",
+                "solution": "12",
+            },
+            {
+                "question": "Máximo común divisor del 14 y del 28",
+                "solution": "14",
+            },
+            {
+                "question": "Múltiplos del 15",
+                "solution": "15, 30, 45, 60",
+            },
+            {
+                "question": "Divisores del 16",
+                "solution": "1, 2, 4, 8, 16",
+            },
+            {
+                "question": "Múltiplos del 17",
+                "solution": "17, 34, 51", 
+            },
+            {
+                "question": "Múltiplo del 6 entre 13 y 23",
+                "solution": "18",
+            },
+            {
+                "question": "Máximo común divisor de 20, 40 y 80",
+                "solution": "20",
+            },
+            {
+                "question": "Mínimo común múltiplo de 3 y 7",
+                "solution": "21",
+            },
+            {
+                "question": "Múltiplo de 11 entre 20 y 25",
+                "solution": "22",
+            },
+            {
+                "question": "Números primos entre el 15 y el 25",
+                "solution": "17, 19, 23", 
+            },
+            {
+                "question": "Múltiplos del 8 entre 18 y 30",
+                "solution": "24",
+            },
+            {
+                "question": "Múltiplo del 5 que es cuadrado perfecto",
+                "solution": "25",
+            },
+            {
+                "question": "Divisores del 26",
+                "solution": "1, 2, 13, 26",
+            },
+            {
+                "question": "Múltiplos del 27",
+                "solution": "27, 54",
+            },
+            {
+                "question": "Mínimo común múltiplo de 4 y 14",
+                "solution": "28",
+            },
+            {
+                "question": "Número primo más cercano al 27",
+                "solution": "29", 
+            },
+            {
+                "question": "Número primo entre 30 y 36",
+                "solution": "31", 
+            },
+            {
+                "question": "Múltiplo en común entre 8 y 16 que no sea su mínimo común múltiplo",
+                "solution": "32", 
+            },
+            {
+                "question": "Mínimo común múltiplo de 3 y 11",
+                "solution": "33",
+            },
+            {
+                "question": "Múltiplos del 35",
+                "solution": "35",
+            },
+            {
+                "question": "Número par que contenga el 3 y uno de los múltiplos del 3",
+                "solution": "36",
+            },
+            {
+                "question": "Número primo formado por 7 y 3.",
+                "solution": "37",
+            },
+            {
+                "question": "Máximo común divisor de 38 y 76",
+                "solution": "38",
+            },
+            {
+                "question": "Múltiplo del 3 entre el 37 y el 40",
+                "solution": "39",
+            },
+            {
+                "question": "Máximo común divisor de 40 y 120",
+                "solution": "40",
+            },
+            {
+                "question": "Número primo más cercano el 40",
+                "solution": "41",
+            },
+            {
+                "question": "Mínimo común múltiplo de 6 y 7",
+                "solution": "42",
+            },
+            {
+                "question": "Números primos de la decena del 40 que no contenga el 1",
+                "solution": "43, 47",
+            },
+            {
+                "question": "Mínimo común múltiplo de 22 y 4",
+                "solution": "44",
+            },
+            {
+                "question": "Mínimo común múltiplo de 46 y 2",
+                "solution": "46",
+            },
+            {
+                "question": "Múltiplos del 6 entre 45 y 52",
+                "solution": "48",
+            },
+            {
+                "question": "Múltiplo del 7 que es un cuadrado perfecto",
+                "solution": "49",
+            },
+            {
+                "question": "Múltiplos del 5 entre 46 y 54",
+                "solution": "50",
+            },
+            {
+                "question": "Mínimo común múltiplo de 26 y 4",
+                "solution": "52",
+            },
+            {
+                "question": "Múltiplos del 53", //DIVISORES?
+                "solution": "53",
+            },
+            {
+                "question": "Múltiplo del 5 que tiene el mismo número en las unidades y en las decenas",
+                "solution": "55",
+            },
+            {
+                "question": "Múltiplo del 7 que tiene 5 decenas",
+                "solution": "56",
+            },
+            {
+                "question": "Múltiplos del 19",
+                "solution": "19, 38, 57",
+            },
+            {
+                "question": "Máximo común divisor de 58 y 116",
+                "solution": "58",
+            },
+            {
+                "question": "Múltiplos del 59",
+                "solution": "59",
+            }  
+        ]
+
+        let shown_cards = [];
+    </script>
+        <script>
+        function popUpCard() {     
+            if (shown_cards.length >= data.length) {
+                Swal.fire({
+                    title: 'Todas las tarjetas ya fueron mostradas',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                })
+                return;
+            }
+            let index = Math.floor(Math.random() * data.length);
+            const element = data[index];
+            if (shown_cards.includes(element)) {
+                popUpCard();
+                return;
+            }
+            Swal.fire({
+                title: element.question,
+                icon: 'question',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: `Resolver`,
+                denyButtonText: `Guardar`,
+                cancelButtonText: `Cancelar`,
+                denyButtonColor: '#008800',
+                focusDeny: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: element.solution,
+                        text: 'Solución',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+                    showRow(element.question, element.solution, index);
+                    shown_cards.push(element);
+                } else if (result.isDenied) {
+                    showRow(element.question, `<button class='fancy-button solve' onclick="solve('`+ element.question +`', `+ index +`, true)">Resolver</button>`, index);
+                    shown_cards.push(element);
+                } else if (result.isCanceled) {
+                    return;
+                }
+            })
+        }
+        
+        function showRow(question, solution, id){
+            const table = document.getElementById("table-tarjetas-body");
+            const row = document.createElement("tr");
+            const td1 = document.createElement("td");
+            const td2 = document.createElement("td");
+            td1.innerHTML = question
+            td2.innerHTML = solution;
+            td2.setAttribute("id", id);
+            row.appendChild(td1);
+            row.appendChild(td2);
+            table.appendChild(row);
+        }
+
+        function showLast(){
+            const table = document.getElementById("table-tarjetas-body");
+            if (shown_cards.length == 0) {
+                return;
+            }
+            const element = shown_cards[shown_cards.length - 1];
+            Swal.fire({
+                title: element.question,
+                icon: 'info',
+                confirmButtonText: 'Ok'
+            })
+        }
+
+        function solve(question, id, pop) {
+            const table = document.getElementById("table-tarjetas-body");
+            const element = shown_cards.find((element) => element.question == question);
+            const field = document.getElementById(id);
+            if (pop == true) {
+                Swal.fire({
+                    title: element.solution,
+                    text: 'Solución',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                })
+            }
+            field.innerHTML = element.solution;
+        }
+
+        function solveAll() {
+            table_rows = document.getElementById("table-tarjetas-body").rows;
+            for(let row of table_rows) {
+                id = row.children[1].id;
+                question = row.children[0].innerHTML;
+                solve(question, id, false)
+            }
+        }
+
+        function reset(){
+            shown_cards = [];
+            const table = document.getElementById("table-tarjetas-body");
+            table.innerHTML = "";
+        }
+    </script>
+    </body>
+</html>
