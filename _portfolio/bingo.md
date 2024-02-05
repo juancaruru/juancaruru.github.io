@@ -1,13 +1,13 @@
 ---
 title: Math's Bingo
 subtitle: Project made for a Primary Education degree student.
-image: assets/img/portfolio/01-full.jpg
+image: assets/img/portfolio/bingo.jpg
 alt: Shirts on a hanger
 
 caption:
   title: Maths' Bingo
-  subtitle: Mini-project
-  thumbnail: assets/img/portfolio/01-thumbnail.jpg
+  subtitle: Personal project
+  thumbnail: assets/img/portfolio/bingo.jpg
 ---
 This was a small project for a University Project of Didactics of the Mathematics for a Degree in Primary Education. The idea was to create a bingo game to help children learn some math's concepts.
 
@@ -20,5 +20,5 @@ This project was entirely made using HTML, CSS and JavaScript.
 {:.list-inline}
 - Date: November 2023
 - Client: Primary Education degree student
-- Category: Mini-project
+- Category: Personal project
 
