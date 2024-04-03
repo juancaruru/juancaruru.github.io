@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nombres aleatorios</title>
-    <link rel="stylesheet" href="/assets/css/bingo.css">
+    <title>Muevete-te-te-te</title>
+    <link rel="stylesheet" href="/assets/css/random-names.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -16,149 +16,16 @@
         <a href="/" class="go-homepage-button"><i class="fa fa-home"></i></a>
     </header>
     <div class="container">
-        <h1 class="title">Nombre aleatorio</h1>
-        <h2 class="subtitle"> Selector aleatorio de nombres</h2>
+        <h1 class="title">MUÉVETE TE TE</h1>
+        <h2 class="subtitle"> te te te te te te te te te te te te ...</h2>
         <div class="button-container">
             <button class="fancy-button new" onclick="popUpCard()">Nuevo nombre</button>
-            <!-- <button class="fancy-button last" id="show" onclick="showLast()">Mostrar
-                    de nuevo</button>
-                <button class="fancy-button solveAll" onclick="solveAll()">Resolver
-                    todos</button>
-                <button class="fancy-button reset" onclick="reset()">Nuevo bingo</button> -->
         </div>
-        <!-- <table id="table-tarjetas">
-                <thead>
-                    <tr>
-                        <th>Criterio</th>
-                        <th>Solución</th>
-                    </tr>
-                </thead>
-                <tbody id="table-tarjetas-body">
-                </tbody>
-            </table> -->
     </div>
-    <footer>Game made by <a href="https://github.com/juancaruru"><i class="fa fa-github"></i> juancaruru</a> — Project
+    <footer>Page made by <a href="https://github.com/juancaruru"><i class="fa fa-github"></i> juancaruru</a> — Project
         under MIT License</footer>
     <script>
-        const spanishNames = [
-            "Alejandro",
-            "Ana",
-            "Antonio",
-            "Beatriz",
-            "Carlos",
-            "Carmen",
-            "Diego",
-            "Elena",
-            "Emilio",
-            "Fernanda",
-            "Francisco",
-            "Gabriela",
-            "Guillermo",
-            "Inés",
-            "Isabel",
-            "Javier",
-            "Laura",
-            "Luis",
-            "Manuela",
-            "María",
-            "Miguel",
-            "Natalia",
-            "Pablo",
-            "Patricia",
-            "Pedro",
-            "Raquel",
-            "Ricardo",
-            "Roberto",
-            "Rosa",
-            "Santiago",
-            "Sofía",
-            "Teresa",
-            "Tomás",
-            "Valentina",
-            "Verónica",
-            "Vicente",
-            "Ximena",
-            "Yolanda",
-            "Zoe",
-            "Adrián",
-            "Agustín",
-            "Alba",
-            "Alberto",
-            "Alicia",
-            "Alfonso",
-            "Amparo",
-            "Andrés",
-            "Ángela",
-            "Armando",
-            "Aurora",
-            "Belen",
-            "Bernardo",
-            "Blanca",
-            "Bruno",
-            "Cecilia",
-            "Celia",
-            "César",
-            "Clara",
-            "Cristian",
-            "Cristina",
-            "Daniel",
-            "Dolores",
-            "Eduardo",
-            "Elsa",
-            "Enrique",
-            "Esteban",
-            "Estela",
-            "Felipe",
-            "Félix",
-            "Gloria",
-            "Gonzalo",
-            "Graciela",
-            "Héctor",
-            "Hugo",
-            "Ignacio",
-            "Irene",
-            "Jaime",
-            "Jorge",
-            "José",
-            "Julia",
-            "Leonardo",
-            "Lidia",
-            "Lucía",
-            "Luisa",
-            "Marcos",
-            "Martín",
-            "Matías",
-            "Mónica",
-            "Nacho",
-            "Nadia",
-            "Nicolás",
-            "Olga",
-            "Óscar",
-            "Paco",
-            "Rafael",
-            "Ramón",
-            "Renata",
-            "Roberto",
-            "Rodrigo",
-            "Rubén",
-            "Salvador",
-            "Samuel",
-            "Sara",
-            "Sergio",
-            "Silvia",
-            "Simón",
-            "Susana",
-            "Tatiana",
-            "Vanesa",
-            "Víctor",
-            "Virginia",
-            "Xavier",
-            "Yago",
-            "Yasmina",
-            "Yolanda",
-            "Zaida",
-            "Zaira"
-        ];
+        const spanishNames = ['Ana R.', 'Candela', 'Sandra', 'Nayara', 'Álvaro', 'Poda', 'Pedro', 'Lourdes', 'Dámaris', 'Sonia', 'Alba Romero', 'Irene Román', 'Edu', 'Iván Silva', 'Josemi', 'Iván Ruiz', 'Ale Sánchez', 'Griselda', 'Vanesa', 'Pablo', 'Eva', 'Alba Serrano', 'Lucía Sánchez', 'Manu', 'Mirian', 'Celeste', 'Cristina Moreno', 'Rocío', 'Mercedes Pérez', 'Nacho', 'Andrea', 'Nora Ojeda', 'Emilio', 'Ana Belén', 'Dariana', 'Nora Luque', 'Carmen Mesa', 'Óscar', 'Irene Pacheco', 'Clara', 'Lidia', 'Cristina Miguel', 'Ana Moreno', 'Cristina Martín', 'Raquel', 'Laura', 'Naira', 'María Morán', 'Darío', 'Jorge', 'Manel', 'Lucía Zorrilla', 'Pau', 'Ángela'];
         let shown_names = [];
     </script>
     <script>
@@ -178,8 +45,7 @@
                 return;
             }
             Swal.fire({
-                title: name,
-                icon: 'info',
+                title: `<br><span style="font-size:6rem;word-break:keep-all">${name}</span><br><br>`,
                 confirmButtonText: `Siguiente`,
                 showCloseButton: true,
             }).then((result) => {
@@ -189,65 +55,7 @@
                 }
             })
         }
-
     </script>
-    <!-- <script>
-        function showRow(question, solution, id) {
-            const table = document.getElementById("table-tarjetas-body");
-            const row = document.createElement("tr");
-            const td1 = document.createElement("td");
-            const td2 = document.createElement("td");
-            td1.innerHTML = question
-            td2.innerHTML = solution;
-            td2.setAttribute("id", id);
-            row.appendChild(td1);
-            row.appendChild(td2);
-            table.appendChild(row);
-        }
-
-        function showLast() {
-            const table = document.getElementById("table-tarjetas-body");
-            if (shown_cards.length == 0) {
-                return;
-            }
-            const element = shown_cards[shown_cards.length - 1];
-            Swal.fire({
-                title: element.question,
-                icon: 'info',
-                confirmButtonText: 'Ok'
-            })
-        }
-
-        function solve(question, id, pop) {
-            const table = document.getElementById("table-tarjetas-body");
-            const element = shown_cards.find((element) => element.question == question);
-            const field = document.getElementById(id);
-            if (pop == true) {
-                Swal.fire({
-                    title: element.solution,
-                    text: 'Solución',
-                    icon: 'success',
-                    confirmButtonText: 'Ok'
-                })
-            }
-            field.innerHTML = element.solution;
-        }
-
-        function solveAll() {
-            table_rows = document.getElementById("table-tarjetas-body").rows;
-            for (let row of table_rows) {
-                id = row.children[1].id;
-                question = row.children[0].innerHTML;
-                solve(question, id, false)
-            }
-        }
-
-        function reset() {
-            shown_cards = [];
-            const table = document.getElementById("table-tarjetas-body");
-            table.innerHTML = "";
-        }
-    </script> -->
 </body>
 
 </html>
