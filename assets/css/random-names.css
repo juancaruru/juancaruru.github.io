@@ -1,6 +1,8 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f5f5f5;
+    background-color: #fae4b4;
+    opacity: 0.8;
+    background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #fae4b4 24px ), repeating-linear-gradient( #ffbfef55, #ffbfef );
     margin: 0;
     padding: 0;
     display: flex;
