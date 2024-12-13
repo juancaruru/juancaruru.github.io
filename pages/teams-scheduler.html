@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/assets/css/team-scheduler.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body class="bg-gray-100">
@@ -33,7 +34,7 @@
                         </button>
                     </div>
 
-                    <div class="w-full md:w-full px-3">
+                    <!-- <div class="w-full md:w-full px-3">
                         <button type="file" accept=".xlsx" name="teams-file" id="teams-file"
                             class="appearance-none block w-full flex flex-row justify-center items-center bg-gray-100 text-green-700 font-bold rounded-lg py-3 px-3 leading-tight hover:bg-gray-200 focus:outline-none focus:bg-gray-300 focus:ring focus:ring-gray-100 disabled:opacity-75 disabled:cursor-not-allowed disabled:hover:bg-gray-100"
                             disabled>
@@ -44,7 +45,7 @@
                             </svg>
                             Subir listado
                         </button>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="w-full bg-white shadow-md p-6 space-y-3">
@@ -83,14 +84,13 @@
                         name="schedule_type" id="schedule_type">
                         <option value="league-double">Tipo liga (ida y vuelta)</option>
                         <option value="league-single">Tipo liga (solo ida)</option>
-                        <option value="brackets" disabled>Tipo playoff (brackets)</option>
+                        <option value="brackets">Tipo playoff (brackets)</option>
                         <option value="combo-double" disabled>Liga (ida y vuelta) + playoffs</option>
                         <option value="combo-single" disabled>Liga (solo ida) + playoffs</option>
                     </select>
                 </div>
                 <div class="w-full md:w-full px-3">
-                    <button
-                        onclick="generateSchedule()"
+                    <button onclick="generateSchedule()"
                         class="appearance-none block w-full bg-green-700 text-gray-100 font-bold rounded-lg py-3 px-3 leading-tight hover:bg-green-600 focus:outline-none focus:bg-green-800 focus:ring focus:ring-green-600"
                         id="gen-schedule">
                         Generar cuadrante
@@ -103,8 +103,9 @@
                 <thead class="text-sm font-semibold text-gray-800 bg-gray-100 mx-auto">
                     <tr>
                         <th>
-                            <svg class="mx-auto h-6 w-6 fill-gray-600"  viewBox="0 0 20 20">
-                                <path d="M10,2.531c-4.125,0-7.469,3.344-7.469,7.469c0,4.125,3.344,7.469,7.469,7.469c4.125,0,7.469-3.344,7.469-7.469C17.469,5.875,14.125,2.531,10,2.531 M10,3.776c1.48,0,2.84,0.519,3.908,1.384c-1.009,0.811-2.111,1.512-3.298,2.066C9.914,6.072,9.077,5.017,8.14,4.059C8.728,3.876,9.352,3.776,10,3.776 M6.903,4.606c0.962,0.93,1.82,1.969,2.53,3.112C7.707,8.364,5.849,8.734,3.902,8.75C4.264,6.976,5.382,5.481,6.903,4.606 M3.776,10c2.219,0,4.338-0.418,6.29-1.175c0.209,0.404,0.405,0.813,0.579,1.236c-2.147,0.805-3.953,2.294-5.177,4.195C4.421,13.143,3.776,11.648,3.776,10 M10,16.224c-1.337,0-2.572-0.426-3.586-1.143c1.079-1.748,2.709-3.119,4.659-3.853c0.483,1.488,0.755,3.071,0.784,4.714C11.271,16.125,10.646,16.224,10,16.224 M13.075,15.407c-0.072-1.577-0.342-3.103-0.806-4.542c0.673-0.154,1.369-0.243,2.087-0.243c0.621,0,1.22,0.085,1.807,0.203C15.902,12.791,14.728,14.465,13.075,15.407 M14.356,9.378c-0.868,0-1.708,0.116-2.515,0.313c-0.188-0.464-0.396-0.917-0.621-1.359c1.294-0.612,2.492-1.387,3.587-2.284c0.798,0.97,1.302,2.187,1.395,3.517C15.602,9.455,14.99,9.378,14.356,9.378">
+                            <svg class="mx-auto h-6 w-6 fill-gray-600" viewBox="0 0 20 20">
+                                <path
+                                    d="M10,2.531c-4.125,0-7.469,3.344-7.469,7.469c0,4.125,3.344,7.469,7.469,7.469c4.125,0,7.469-3.344,7.469-7.469C17.469,5.875,14.125,2.531,10,2.531 M10,3.776c1.48,0,2.84,0.519,3.908,1.384c-1.009,0.811-2.111,1.512-3.298,2.066C9.914,6.072,9.077,5.017,8.14,4.059C8.728,3.876,9.352,3.776,10,3.776 M6.903,4.606c0.962,0.93,1.82,1.969,2.53,3.112C7.707,8.364,5.849,8.734,3.902,8.75C4.264,6.976,5.382,5.481,6.903,4.606 M3.776,10c2.219,0,4.338-0.418,6.29-1.175c0.209,0.404,0.405,0.813,0.579,1.236c-2.147,0.805-3.953,2.294-5.177,4.195C4.421,13.143,3.776,11.648,3.776,10 M10,16.224c-1.337,0-2.572-0.426-3.586-1.143c1.079-1.748,2.709-3.119,4.659-3.853c0.483,1.488,0.755,3.071,0.784,4.714C11.271,16.125,10.646,16.224,10,16.224 M13.075,15.407c-0.072-1.577-0.342-3.103-0.806-4.542c0.673-0.154,1.369-0.243,2.087-0.243c0.621,0,1.22,0.085,1.807,0.203C15.902,12.791,14.728,14.465,13.075,15.407 M14.356,9.378c-0.868,0-1.708,0.116-2.515,0.313c-0.188-0.464-0.396-0.917-0.621-1.359c1.294-0.612,2.492-1.387,3.587-2.284c0.798,0.97,1.302,2.187,1.395,3.517C15.602,9.455,14.99,9.378,14.356,9.378">
                                 </path>
                             </svg>
                         </th>
@@ -119,13 +120,15 @@
                     <!-- Rows will be added dynamically -->
                 </tbody>
             </table>
-            <button class="absolute bottom-3 right-3 bg-rose-700 hover:bg-rose-500 active:bg-rose-600 text-sm text-gray-100 font-semibold py-1 px-3 rounded" id="clear-schedule">Clear</button>
+            <button
+                class="absolute bottom-3 right-3 bg-rose-700 hover:bg-rose-500 active:bg-rose-600 text-sm text-gray-100 font-semibold py-1 px-3 rounded"
+                id="clear-schedule">Clear</button>
         </div>
     </div>
+
     <!-- Add a team to the list when the button is clicked -->
     <script>
-        let teamList = [];
-        document.getElementById('add-team').addEventListener('click', () => {
+        function enterTeam() {
             const teamName = document.getElementById('team').value;
             if (teamName.trim() == '') {
                 return;
@@ -137,7 +140,18 @@
             teamList.push(teamName);
             addTeamRow(teamName);
             document.getElementById('team').value = '';
-        });
+        }
+        let teamList = [];
+        document.getElementById('add-team')
+            .addEventListener('click', () => {
+                enterTeam()
+            });
+        document.getElementById('team')
+            .addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    enterTeam()
+                }
+            })
     </script>
     <script>
         document.getElementById('clear-schedule').addEventListener('click', () => {
@@ -164,7 +178,7 @@
             if (indexName % 2 == 0) {
                 row.classList.add('bg-gray-50');
             }
-            
+
             // Create the first cell with the SVG
             const svgCell = document.createElement('td');
             svgCell.innerHTML = `
@@ -231,6 +245,13 @@
     </script>
     <script>
         function generateSchedule() {
+            const brackets_names = {
+                "F": "FINAL",
+                "SF":"SEMIFINAL",
+                "QF": "CUARTOS DE FINAL",
+                "8Q": "OCTAVOS",
+                "16Q": "DIECISEISAVOS"
+            }
             const category = document.getElementById('category').value;
             const sex = document.getElementById('sex').value;
             const type = document.getElementById('schedule_type').value;
@@ -245,7 +266,6 @@
                             <table class="w-full border-collapse border border-2 border-gray-100">
                                 <thead class="text-sm font-semibold text-gray-800 bg-gray-100 mx-auto">
                                     <tr>
-                                        <th class="p-2 text-left">Hora</th>
                                         <th class="p-2">Local</th>
                                         <th class="p-2"></th>
                                         <th class="p-2">Visitante</th>
@@ -254,7 +274,6 @@
                                 <tbody>
                                     ${matches.map((match, index) => `
                                         <tr class="${index % 2 == 0 ? 'bg-gray-50' : 'bg-transparent'}">
-                                            <td class="p-2 text-left">00:00</td>
                                             <td class="p-2">${match.team}</td>
                                             <td class="p-2">vs</td>
                                             <td class="p-2">${match.opponent}</td>
@@ -276,7 +295,6 @@
                             <table class="w-full border-collapse border border-2 border-gray-100">
                                 <thead class="text-sm font-semibold text-gray-800 bg-gray-100 mx-auto">
                                     <tr>
-                                        <th class="p-2 text-left">Hora</th>
                                         <th class="p-2">Local</th>
                                         <th class="p-2"></th>
                                         <th class="p-2">Visitante</th>
@@ -285,7 +303,6 @@
                                 <tbody>
                                     ${matches.map((match, index) => `
                                         <tr class="${index % 2 == 0 ? 'bg-gray-50' : 'bg-transparent'}">
-                                            <td class="p-2 text-left">00:00</td>
                                             <td class="p-2">${match.team}</td>
                                             <td class="p-2">vs</td>
                                             <td class="p-2">${match.opponent}</td>
@@ -301,7 +318,38 @@
                     })
                     break;
                 case 'brackets':
-                    //generateTournamentSchedule(category, sex);
+                    matches = generateBracketsSchedule(teamList, category, sex);
+                    const output_html = Object.entries(matches).map(([round, games]) => `
+                        <div class="w-full max-h-[400px] overflow-auto mb-4">
+                            <h2 class="text-lg font-bold text-gray-800 mb-2">${brackets_names[round]}</h2>
+                            <table class="w-full border-collapse border border-2 border-gray-100">
+                                <thead class="text-sm font-semibold text-gray-800 bg-gray-100 mx-auto">
+                                    <tr>
+                                        <th>#</th>
+                                        <th class="p-2">Local</th>
+                                        <th class="p-2"></th>
+                                        <th class="p-2">Visitante</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${games.map((game, index) => `
+                                        <tr class="${index % 2 == 0 ? 'bg-gray-50' : 'bg-transparent'}">
+                                            <td class="p-2 text-sm text-gray-600">${index + 1}</td>
+                                            <td class="p-2">${game.team}</td>
+                                            <td class="p-2">vs</td>
+                                            <td class="p-2">${game.opponent}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    `).join('');
+
+                    Swal.fire({
+                        title: 'Partidos generados',
+                        html: output_html,
+                        confirmButtonText: 'Ok',
+                    })
                     break;
                 case 'combo-single':
                     //generateCupSchedule(category, sex);
@@ -319,7 +367,7 @@
             }
         }
 
-        function generateSingleLeagueSchedule(teams, category, sex, shuffle=true) {
+        function generateSingleLeagueSchedule(teams, category, sex, shuffle = true) {
             console.log('Generating single league schedule for ' + category + ' ' + sex + '...');
             const remaining_teams = [...teams];
             let matches = [];
@@ -331,22 +379,70 @@
                 });
             })
             if (shuffle) {
-                matches = matches
-                    .map(value => ({ value, sort: Math.random() }))
-                    .sort((a, b) => a.sort - b.sort)
-                    .map(({ value }) => value)
+                matches = shuffleArray(matches);
             }
 
             return matches
         }
 
-        function generateDoubleLeagueSchedule(teams, category, sex, shuffle=true) {
+        function generateBracketsSchedule(teams, category, sex, shuffle = false) {
+            const brackets_round_types = {
+                2: "F",
+                4: "SF",
+                8: "QF",
+                16: "8Q",
+                32: "16Q",
+            }
+            const min_n_teams = [4, 8, 16, 32];
+            const n_teams = min_n_teams.find((n) => n >= teams.length);
+            if (teams.length < n_teams) {
+                teams = teams.concat(Array.from({ length: n_teams - teams.length }, (_, i) => `DESCANSA`));
+            }
+            if (shuffle) {
+                teams = shuffleArray(teams);
+            }
+
+            let matches = {};
+            // Calculate N rounds
+            const n_rounds = Math.log2(n_teams);
+            // Define first round with given teams
+            let first_round = [];
+            for (let i = 0; i < n_teams / 2; i++) {
+                first_round.push({ team: teams[i], opponent: teams[n_teams - 1 - i] });
+            }
+            matches[brackets_round_types[n_teams]] = first_round;
+            // Calculate other rounds
+            for (let i = 2; i <= n_rounds; i++) {
+                let matches_round = [];
+                let n_teams_left = n_teams / Math.pow(2, i - 1);
+                let winners = Array.from({ length: n_teams_left }, (_, index) => `Ganador ${brackets_round_types[n_teams_left*Math.pow(2, i - 1)]}-${index+1}`);
+                
+                for (let j = 0; j < n_teams_left / 2; j++) {
+                    matches_round.push({ team: winners[j], opponent: winners[n_teams_left - 1 - j] });
+                }
+                matches[brackets_round_types[n_teams_left]] = matches_round;
+            }
+            return matches;
+        }
+
+        function generateDoubleLeagueSchedule(teams, category, sex, shuffle = true) {
+            console.log('Generating double league schedule for ' + category + ' ' + sex + '...');
             let matches1 = generateSingleLeagueSchedule(teams, category, sex, shuffle);
             let matches2 = [];
             matches1.forEach((match) => {
                 matches2.push({ team: match.opponent, opponent: match.team });
             })
             return [...matches1, ...matches2];
+        }
+    </script>
+
+    <script>
+        function shuffleArray(array) {
+            const output = array
+                .map(value => ({ value, sort: Math.random() }))
+                .sort((a, b) => a.sort - b.sort)
+                .map(({ value }) => value)
+            return output
         }
     </script>
 
