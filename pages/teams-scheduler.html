@@ -85,8 +85,8 @@
                         <option value="league-double">Tipo liga (ida y vuelta)</option>
                         <option value="league-single">Tipo liga (solo ida)</option>
                         <option value="brackets">Tipo playoff (brackets)</option>
-                        <option value="combo-double" disabled>Liga (ida y vuelta) + playoffs</option>
-                        <option value="combo-single" disabled>Liga (solo ida) + playoffs</option>
+                        <option value="combo-double">Liga (ida y vuelta) + playoffs</option>
+                        <option value="combo-single">Liga (solo ida) + playoffs</option>
                     </select>
                 </div>
                 <div class="w-full md:w-full px-3">
@@ -244,43 +244,24 @@
         }
     </script>
     <script>
+        const brackets_names = {
+            "F": "FINAL",
+            "SF":"SEMIFINAL",
+            "QF": "CUARTOS DE FINAL",
+            "8Q": "OCTAVOS",
+            "16Q": "DIECISEISAVOS"
+        }
         function generateSchedule() {
-            const brackets_names = {
-                "F": "FINAL",
-                "SF":"SEMIFINAL",
-                "QF": "CUARTOS DE FINAL",
-                "8Q": "OCTAVOS",
-                "16Q": "DIECISEISAVOS"
-            }
             const category = document.getElementById('category').value;
             const sex = document.getElementById('sex').value;
             const type = document.getElementById('schedule_type').value;
 
-            let matches = []
-            let output_html = '';
+            let matches
+            let output_html;
             switch (type) {
                 case 'league-single':
                     matches = generateSingleLeagueSchedule(teamList, category, sex);
-                    output_html = `
-                        <div class="w-full max-h-[400px] overflow-auto">
-                            <table class="w-full border-collapse border border-2 border-gray-100">
-                                <thead class="text-sm font-semibold text-gray-800 bg-gray-100 mx-auto">
-                                    <tr>
-                                        <th class="p-2">Local</th>
-                                        <th class="p-2"></th>
-                                        <th class="p-2">Visitante</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${matches.map((match, index) => `
-                                        <tr class="${index % 2 == 0 ? 'bg-gray-50' : 'bg-transparent'}">
-                                            <td class="p-2">${match.team}</td>
-                                            <td class="p-2">vs</td>
-                                            <td class="p-2">${match.opponent}</td>
-                                        </tr>`).join('')}
-                                </tbody>
-                            </table>
-                        </div>`;
+                    output_html = generateIndividualTable(matches);
 
                     Swal.fire({
                         title: 'Partidos generados',
@@ -290,26 +271,7 @@
                     break;
                 case 'league-double':
                     matches = generateDoubleLeagueSchedule(teamList, category, sex);
-                    output_html = `
-                        <div class="w-full max-h-[400px] overflow-auto">
-                            <table class="w-full border-collapse border border-2 border-gray-100">
-                                <thead class="text-sm font-semibold text-gray-800 bg-gray-100 mx-auto">
-                                    <tr>
-                                        <th class="p-2">Local</th>
-                                        <th class="p-2"></th>
-                                        <th class="p-2">Visitante</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${matches.map((match, index) => `
-                                        <tr class="${index % 2 == 0 ? 'bg-gray-50' : 'bg-transparent'}">
-                                            <td class="p-2">${match.team}</td>
-                                            <td class="p-2">vs</td>
-                                            <td class="p-2">${match.opponent}</td>
-                                        </tr>`).join('')}
-                                </tbody>
-                            </table>
-                        </div>`;
+                    output_html = generateIndividualTable(matches);
 
                     Swal.fire({
                         title: 'Partidos generados',
@@ -319,31 +281,7 @@
                     break;
                 case 'brackets':
                     matches = generateBracketsSchedule(teamList, category, sex);
-                    const output_html = Object.entries(matches).map(([round, games]) => `
-                        <div class="w-full max-h-[400px] overflow-auto mb-4">
-                            <h2 class="text-lg font-bold text-gray-800 mb-2">${brackets_names[round]}</h2>
-                            <table class="w-full border-collapse border border-2 border-gray-100">
-                                <thead class="text-sm font-semibold text-gray-800 bg-gray-100 mx-auto">
-                                    <tr>
-                                        <th>#</th>
-                                        <th class="p-2">Local</th>
-                                        <th class="p-2"></th>
-                                        <th class="p-2">Visitante</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${games.map((game, index) => `
-                                        <tr class="${index % 2 == 0 ? 'bg-gray-50' : 'bg-transparent'}">
-                                            <td class="p-2 text-sm text-gray-600">${index + 1}</td>
-                                            <td class="p-2">${game.team}</td>
-                                            <td class="p-2">vs</td>
-                                            <td class="p-2">${game.opponent}</td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                        </div>
-                    `).join('');
+                    output_html = generateMultipleTable(matches);
 
                     Swal.fire({
                         title: 'Partidos generados',
@@ -352,10 +290,24 @@
                     })
                     break;
                 case 'combo-single':
-                    //generateCupSchedule(category, sex);
+                    matches = generateComboSchedule(teamList, category, sex, 'single');
+                    output_html = generateMultipleTable(matches);
+
+                    Swal.fire({ 
+                        title: 'Partidos generados',
+                        html: output_html,
+                        confirmButtonText: 'Ok',
+                    })
                     break;
                 case 'combo-double':
-                    //generateCupSchedule(category, sex);
+                    matches = generateComboSchedule(teamList, category, sex, 'double');
+                    output_html = generateMultipleTable(matches);
+
+                    Swal.fire({ 
+                        title: 'Partidos generados',
+                        html: output_html,
+                        confirmButtonText: 'Ok',
+                    })
                     break;
                 default:
                     Swal.fire({
@@ -368,7 +320,6 @@
         }
 
         function generateSingleLeagueSchedule(teams, category, sex, shuffle = true) {
-            console.log('Generating single league schedule for ' + category + ' ' + sex + '...');
             const remaining_teams = [...teams];
             let matches = [];
             teams.forEach((team) => {
@@ -426,13 +377,70 @@
         }
 
         function generateDoubleLeagueSchedule(teams, category, sex, shuffle = true) {
-            console.log('Generating double league schedule for ' + category + ' ' + sex + '...');
             let matches1 = generateSingleLeagueSchedule(teams, category, sex, shuffle);
             let matches2 = [];
             matches1.forEach((match) => {
                 matches2.push({ team: match.opponent, opponent: match.team });
             })
             return [...matches1, ...matches2];
+        }
+
+        function generateComboSchedule(teams, category, sex, type, shuffle = true) {
+            let league_matches = [];
+            switch (type) {
+                case 'single':
+                    league_matches = generateSingleLeagueSchedule(teams, category, sex, shuffle);
+                    break;
+                case 'double':
+                    league_matches = generateDoubleLeagueSchedule(teams, category, sex, shuffle);
+                    break;
+                default:
+                    break;
+            }
+            const bracket_teams = teams.map((team) => {
+                return String(teams.indexOf(team) + 1)+"º";
+            })
+            let bracket_matches = generateBracketsSchedule(bracket_teams, category, sex, shuffle);
+            return {
+                "LIGA": league_matches,
+                ...bracket_matches
+            }
+        }
+    </script>
+
+    <script>
+        function generateIndividualTable(games, title=undefined) {
+            return `
+                 <div class="w-full max-h-[400px] overflow-auto mb-4 space-y-2">
+                    <h2 class="text-lg font-bold text-gray-800">${title}</h2>
+                    <table class="w-full border-collapse border border-2 border-gray-100">
+                        <thead class="text-sm font-semibold text-gray-800 bg-gray-100 mx-auto">
+                            <tr>
+                                <th>#</th>
+                                <th class="p-2">Local</th>
+                                <th class="p-2"></th>
+                                <th class="p-2">Visitante</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${games.map((game, index) => `
+                                <tr class="${index % 2 == 0 ? 'bg-gray-50' : 'bg-transparent'}">
+                                    <td class="p-2 text-sm text-gray-600">${index + 1}</td>
+                                    <td class="p-2">${game.team}</td>
+                                    <td class="p-2">vs</td>
+                                    <td class="p-2">${game.opponent}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>`;
+        }
+
+        function generateMultipleTable(games_object) {
+            return Object.entries(games_object).map(([round, games]) => {
+                const title = brackets_names[round] ? brackets_names[round] : round;
+                return generateIndividualTable(games, title);
+            }).join('');
         }
     </script>
 
