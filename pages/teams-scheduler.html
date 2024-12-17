@@ -381,6 +381,7 @@
             // Define first round with given teams
             let first_round = [];
             for (let i = 0; i < n_teams / 2; i++) {
+                console.log(i)
                 first_round.push({ team: teams[i], opponent: teams[n_teams - 1 - i] });
             }
             matches[brackets_round_types[n_teams]] = first_round;
@@ -422,7 +423,7 @@
             const bracket_teams = teams.map((team) => {
                 return String(teams.indexOf(team) + 1) + "º";
             })
-            let bracket_matches = generateBracketsSchedule(bracket_teams, category, sex, shuffle);
+            let bracket_matches = generateBracketsSchedule(bracket_teams, category, sex, false);
             return {
                 "LIGA": league_matches,
                 ...bracket_matches
