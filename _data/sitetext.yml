@@ -83,8 +83,6 @@ en: &DEFAULT_EN
   footer:
     legal: "Privacy Policy"
     social:
-      - url: https://twitter.com/juancaruruu
-        icon: "fab fa-twitter"
       - url: https://www.linkedin.com/in/juanca-ruiz/
         icon: "fab fa-linkedin-in"
       - url: https://github.com/juancaruru
