@@ -1,3 +1,14 @@
+---
+title: Personal workout
+subtitle: Not a proyect but a personal markdown viewer
+alt: Workout
+
+caption:
+  title: Personal workout
+  subtitle: Not a project
+  thumbnail: https://media.self.com/photos/6398b36c72eb56f726777d06/4:3/w_3200,h_2400,c_limit/weekly-workout-schedule.jpeg
+---
+
 # Plan de entrenamiento
 
 ### MAYO (Post-temporada - Recuperación activa & corrección de desequilibrios)
